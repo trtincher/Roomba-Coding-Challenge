@@ -1,0 +1,9 @@
+{
+  "roomDimensions": [3, 3],
+  "initialRoombaLocation": [0, 0],
+  "dirtLocations": [
+    [0, 1],
+    [3, 3]
+  ],
+  "drivingInstructions": ["N", "E", "E", "S", "W", "S", "S"]
+}

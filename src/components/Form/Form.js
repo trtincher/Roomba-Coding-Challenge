@@ -13,7 +13,22 @@ function FormComponent({ input, setInput }) {
   });
   const [file, setFile] = useState({});
 
-  console.log("file", file);
+  useEffect(() => {
+    if (file.jsonFile !== undefined) {
+      console.log("file", file);
+      let formatedFile = file.jsonFile;
+
+      console.log("formatedFile1", formatedFile);
+
+      formatedFile.dirtLocations = formatedFile.dirtLocations.map(
+        (location) => `[${location}]`
+      );
+      formatedFile.dirtLocations = `${formatedFile.dirtLocations}`;
+      console.log("formatedFile2", formatedFile);
+
+      setForm(formatedFile);
+    }
+  }, [file]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,20 +58,24 @@ function FormComponent({ input, setInput }) {
       <div className="files">
         <Files
           className="files-dropzone"
-          onChange={(file) => fileReader.readAsText(file[0])}
+          onChange={(file) => {
+            fileReader.readAsText(file[file.length - 1]);
+            console.log(file);
+          }}
           onError={(err) => console.log(err)}
           accepts={[".json"]}
           multiple
-          maxFiles={3}
+          maxFiles={20}
           maxFileSize={10000000}
           minFileSize={0}
           clickable
         >
-          Drop files here or click to upload
+          <p>Drop files here or click to upload</p>
+          <i className="fas fa-file-upload"></i>
         </Files>
       </div>
-      <Form onSubmit={handleSubmit}>
-        <h5>- Or Fill Out Form -</h5>
+
+      <Form onSubmit={handleSubmit} className="form">
         <Row>
           <Col>
             <Form.Group controlId="room-dimensions">
@@ -103,9 +122,12 @@ function FormComponent({ input, setInput }) {
             onChange={handleChange}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
+        <h5>Hit Submit Button to See Results!</h5>
+        <div className="buttonDiv">
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </div>
       </Form>
     </div>
   );

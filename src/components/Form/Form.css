@@ -1,5 +1,36 @@
 .formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 20px auto;
   width: 60%;
   padding-bottom: 50px;
+}
+
+.formContainer h5 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.files-dropzone {
+  display: flex;
+  flex-direction: column;
+  background: lightgray;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 250px;
+  margin: 20px auto;
+}
+
+.files-dropzone i {
+  font-size: 30px;
+}
+
+.buttonDiv {
+  display: flex;
+  justify-content: center;
 }
