@@ -39,8 +39,10 @@ function App() {
   return (
     <div className="App">
       <h1>Roomba Coding Challenge</h1>
-      <Form input={input} setInput={setInput} />
-      <Table output={output} />
+      <div className="main-container">
+        <Form input={input} setInput={setInput} />
+        <Table output={output} />
+      </div>
     </div>
   );
 }
