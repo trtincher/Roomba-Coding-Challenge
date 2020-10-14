@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Form.css";
+import Files from "react-files";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -10,6 +11,9 @@ function FormComponent({ input, setInput }) {
   const [form, setForm] = useState({
     ...input,
   });
+  const [file, setFile] = useState({});
+
+  console.log("file", file);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,9 +33,30 @@ function FormComponent({ input, setInput }) {
     console.log(`[${name}]: ${value}`);
   };
 
+  let fileReader = new FileReader();
+  fileReader.onload = (event) => {
+    setFile({ jsonFile: JSON.parse(event.target.result) });
+  };
+
   return (
     <div className="formContainer">
+      <div className="files">
+        <Files
+          className="files-dropzone"
+          onChange={(file) => fileReader.readAsText(file[0])}
+          onError={(err) => console.log(err)}
+          accepts={[".json"]}
+          multiple
+          maxFiles={3}
+          maxFileSize={10000000}
+          minFileSize={0}
+          clickable
+        >
+          Drop files here or click to upload
+        </Files>
+      </div>
       <Form onSubmit={handleSubmit}>
+        <h5>- Or Fill Out Form -</h5>
         <Row>
           <Col>
             <Form.Group controlId="room-dimensions">
