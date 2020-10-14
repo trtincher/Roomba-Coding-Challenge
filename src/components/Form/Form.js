@@ -15,24 +15,17 @@ function FormComponent({ input, setInput }) {
 
   useEffect(() => {
     if (file.jsonFile !== undefined) {
-      console.log("file", file);
       let formatedFile = file.jsonFile;
-
-      console.log("formatedFile1", formatedFile);
-
       formatedFile.dirtLocations = formatedFile.dirtLocations.map(
         (location) => `[${location}]`
       );
       formatedFile.dirtLocations = `${formatedFile.dirtLocations}`;
-      console.log("formatedFile2", formatedFile);
-
       setForm(formatedFile);
     }
   }, [file]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit clicked");
     setInput(form);
   };
 
@@ -45,7 +38,6 @@ function FormComponent({ input, setInput }) {
       ...form,
       [name]: value,
     });
-    console.log(`[${name}]: ${value}`);
   };
 
   let fileReader = new FileReader();
@@ -58,10 +50,7 @@ function FormComponent({ input, setInput }) {
       <div className="files">
         <Files
           className="files-dropzone"
-          onChange={(file) => {
-            fileReader.readAsText(file[file.length - 1]);
-            console.log(file);
-          }}
+          onChange={(file) => fileReader.readAsText(file[file.length - 1])}
           onError={(err) => console.log(err)}
           accepts={[".json"]}
           multiple
@@ -122,7 +111,7 @@ function FormComponent({ input, setInput }) {
             onChange={handleChange}
           />
         </Form.Group>
-        <h5>Hit Submit Button to See Results!</h5>
+        <h5>Hit Submit to See Results!</h5>
         <div className="buttonDiv">
           <Button variant="primary" type="submit">
             Submit
