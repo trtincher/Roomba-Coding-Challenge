@@ -22,21 +22,21 @@ const moveRoomba = (input, setOutput) => {
         position[1]++;
       //Wall Encountered
       else wallCount++;
-
+    //East Movement Logic
     if (instruction === "E")
       if (position[0] !== input.roomDimensions[0] - 1)
         //Normal
         position[0]++;
       //Wall Encountered
       else wallCount++;
-
+    //South Movement Logic
     if (instruction === "S")
       if (position[1] !== 0)
         //Normal
         position[1]--;
       //Wall Encountered
       else wallCount++;
-
+    //West Movement Logic
     if (instruction === "W")
       if (position[0] !== 0)
         //Normal
