@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Card from "react-bootstrap/Card";
 import "./Summary.css";
 
 function Summary({ output }) {
   let finalStep = output[output.length - 1];
   let totalDistanceTraveled = output.length - (1 + finalStep.totalWallHits);
-  console.log("finalStep", finalStep);
 
   return (
     <Card style={{ width: "18rem" }} className="summaryCard">

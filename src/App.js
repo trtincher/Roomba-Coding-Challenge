@@ -31,9 +31,6 @@ function App() {
 
   const [output, setOutput] = useState([]);
 
-  console.log("input in App", input);
-  console.log("output in App", output);
-
   const buildTable = () => {
     let position = [...input.initialRoombaLocation];
     let dirtCount = 0;
