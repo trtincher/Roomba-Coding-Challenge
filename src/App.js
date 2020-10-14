@@ -9,12 +9,7 @@ function App() {
   const [input, setInput] = useState({
     roomDimensions: [10, 10],
     initialRoombaLocation: [1, 1],
-    dirtLocations: [
-      [1, 2],
-      [3, 5],
-      [5, 5],
-      [7, 9],
-    ],
+    dirtLocations: "[1, 2], [3, 5], [5, 5],[7, 9]",
     drivingInstructions: [
       "N",
       "E",
@@ -36,10 +31,14 @@ function App() {
 
   const [output, setOutput] = useState([]);
 
+  console.log("input in App", input);
+  console.log("output in App", output);
+
   const buildTable = () => {
     let position = [...input.initialRoombaLocation];
     let dirtCount = 0;
     let wallCount = 0;
+    let dirtLocs = JSON.parse("[" + input.dirtLocations + "]");
 
     let tableRows = [
       {
@@ -82,9 +81,11 @@ function App() {
         else wallCount++;
 
       //Check Position for Dirt
-      input.dirtLocations.forEach((location) => {
-        if (position[0] === location[0] && position[1] === location[1])
+      dirtLocs.forEach((location, index) => {
+        if (position[0] === location[0] && position[1] === location[1]) {
           dirtCount++;
+          dirtLocs.splice(index, 1);
+        }
       });
 
       //set tableRow Object

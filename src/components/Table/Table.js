@@ -4,7 +4,7 @@ import "./Table.css";
 import Summary from "../Summary/Summary";
 
 function TableComponent({ output }) {
-  console.log("output", output);
+  // console.log("output", output);
 
   if (output[0] === undefined) return <h1>loading...</h1>;
 
@@ -20,6 +20,7 @@ function TableComponent({ output }) {
 
   return (
     <div className="tableContainer">
+      <Summary output={output} />
       <Table responsive striped bordered hover>
         <thead>
           <tr>
@@ -32,7 +33,6 @@ function TableComponent({ output }) {
         </thead>
         <tbody>{tableRows}</tbody>
       </Table>
-      <Summary output={output} />
     </div>
   );
 }

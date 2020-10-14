@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "react-bootstrap/Card";
+import "./Summary.css";
 
 function Summary({ output }) {
   let finalStep = output[output.length - 1];
@@ -7,8 +8,9 @@ function Summary({ output }) {
   console.log("finalStep", finalStep);
 
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card style={{ width: "18rem" }} className="summaryCard">
       <Card.Body>
+        <Card.Title>Summary</Card.Title>
         <Card.Text>
           Final Position:{" "}
           {`${finalStep.roombaLocation[0]}, ${finalStep.roombaLocation[1]}`}
