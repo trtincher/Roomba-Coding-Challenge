@@ -1,9 +1,23 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import "./Table.css";
+import Summary from "../Summary/Summary";
 
 function TableComponent({ output }) {
   console.log("output", output);
+
+  if (output[0] === undefined) return <h1>loading...</h1>;
+
+  const tableRows = output.map((row) => (
+    <tr key={row.step}>
+      <td>{row.step}</td>
+      <td>{`${row.roombaLocation[0]}, ${row.roombaLocation[1]}`}</td>
+      <td>{row.action}</td>
+      <td>{row.totalDirtCollected}</td>
+      <td>{row.totalWallHits}</td>
+    </tr>
+  ));
+
   return (
     <div className="tableContainer">
       <Table responsive striped bordered hover>
@@ -16,18 +30,9 @@ function TableComponent({ output }) {
             <th>Total Wall Hits</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>{output[0].step}</td>
-            <td>
-              {`[${output[0].roombaLocation[0]}, ${output[0].roombaLocation[1]}]`}
-            </td>
-            <td>{output[0].action}</td>
-            <td>{output[0].totalDirtCollected}</td>
-            <td>{output[0].totalWallHits}</td>
-          </tr>
-        </tbody>
+        <tbody>{tableRows}</tbody>
       </Table>
+      <Summary output={output} />
     </div>
   );
 }

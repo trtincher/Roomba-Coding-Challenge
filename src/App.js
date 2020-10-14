@@ -34,20 +34,22 @@ function App() {
     ],
   });
 
-  const [output, setOutput] = useState([
-    {
-      step: 1,
-      roombaLocation: input.initialRoombaLocation,
-      action: null,
-      totalDirtCollected: 0,
-      totalWallHits: 0,
-    },
-  ]);
+  const [output, setOutput] = useState([]);
 
   const buildTable = () => {
-    let position = input.initialRoombaLocation;
+    let position = [...input.initialRoombaLocation];
     let dirtCount = 0;
     let wallCount = 0;
+
+    let tableRows = [
+      {
+        step: 1,
+        roombaLocation: [...position],
+        action: null,
+        totalDirtCollected: 0,
+        totalWallHits: 0,
+      },
+    ];
 
     input.drivingInstructions.forEach((instruction, index) => {
       //North Movement Logic
@@ -85,17 +87,19 @@ function App() {
           dirtCount++;
       });
 
-      //tableRow Object
-      let tableRow = {
+      //set tableRow Object
+      const tableRow = {
         step: index + 2,
-        roombaLocation: position,
+        roombaLocation: [...position],
         action: instruction,
         totalDirtCollected: dirtCount,
         totalWallHits: wallCount,
       };
 
-      setOutput([...output, tableRow]);
+      tableRows.push(tableRow);
     });
+
+    setOutput(tableRows);
   };
 
   useEffect(() => {
@@ -105,7 +109,7 @@ function App() {
   return (
     <div className="App">
       <h1>Roomba Coding Challenge</h1>
-      <Form />
+      <Form input={input} setInput={setInput} />
       <Table output={output} />
     </div>
   );
