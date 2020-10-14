@@ -19,7 +19,9 @@ function TableComponent({ output }) {
         <tbody>
           <tr>
             <td>{output[0].step}</td>
-            <td>{output[0].roombaLocation}</td>
+            <td>
+              {`[${output[0].roombaLocation[0]}, ${output[0].roombaLocation[1]}]`}
+            </td>
             <td>{output[0].action}</td>
             <td>{output[0].totalDirtCollected}</td>
             <td>{output[0].totalWallHits}</td>
